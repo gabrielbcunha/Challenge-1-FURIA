@@ -34,7 +34,7 @@ def enviar_tela_inicial(chat_id):
 
     boas_vindas=""
 
-    with open("FURIA_FULL.png", "rb") as foto:
+    with open("imagens/start_image.png", "rb") as foto:
         bot.send_photo(
             chat_id,
             foto,
@@ -42,22 +42,20 @@ def enviar_tela_inicial(chat_id):
             reply_markup=teclado_inicial()
         )
 
-def menu_time():
+def menu_time_portugues():
     
     teclado = types.InlineKeyboardMarkup()
     
     botao_fallen = types.InlineKeyboardButton("FalleN Capitão", callback_data="botao_fallen")
     botao_molodoy = types.InlineKeyboardButton("molodoy", callback_data="botao_molodoy")
     botao_yuurih = types.InlineKeyboardButton("Yuurih", callback_data="botao_yuurih")
-    botao_yekindar = types.InlineKeyboardButton("YEKINDAR", callback_data="yekindar")
+    botao_yekindar = types.InlineKeyboardButton("YEKINDAR", callback_data="botao_yekindar")
     botao_kscerato = types.InlineKeyboardButton("KSCERATO", callback_data="botao_kscerato")
-    botao_hepa = types.InlineKeyboardButton("Hepa", callback_data="botao_hepa")
-    botao_sidde = types.InlineKeyboardButton("Sidde", callback_data="botao_sidde")
+ 
     
     teclado.add(botao_fallen)
     teclado.add(botao_kscerato, botao_yuurih)
     teclado.add(botao_yekindar, botao_molodoy)
-    teclado.add(botao_hepa, botao_sidde)
     teclado.add(types.InlineKeyboardButton("Voltar", callback_data="botao_voltar"))
     return teclado
 
@@ -70,7 +68,7 @@ def start(mensagem):
     
     """
     
-    with open("FURIA_FULL.png", "rb") as foto:
+    with open("imagens/start_image.png", "rb") as foto:
         bot.send_photo(
             mensagem.chat.id,
             foto,
@@ -83,79 +81,103 @@ def acionamento_botao(call:types.CallbackQuery):
 
     match call.data:
         case "botao_portugues":
-            media = types.InputMediaPhoto(open("FURIA_FULL.png", "rb"), caption=sobre)
+            media = types.InputMediaPhoto(open("imagens/start_image.png", "rb"), caption="Olá")
             bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=teclado_portugues())
 
         #Menu principal em Português
         case "botao_sobre":
             sobre = """📜Acompanhe a nossa trajetoria até aqui📜 
             """
-            media = types.InputMediaPhoto(open("FURIA_FULL.png", "rb"), caption=sobre)
+            media = types.InputMediaPhoto(open("imagens/start_image.png", "rb"), caption=sobre)
             bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=teclado_portugues())
         case "botao_historia":
             historia="""Nossa Historia
             """
-            media = types.InputMediaPhoto(open("FURIA_FULL.png", "rb"), caption=historia)
+            media = types.InputMediaPhoto(open("imagens/start_image.png", "rb"), caption=historia)
             bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=teclado_portugues())
         case "botao_time":
             time="""Nossa Historia
             """
             
-            media = types.InputMediaPhoto(open("FURIA_FULL.png", "rb"), caption=time)
-            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time())
+            media = types.InputMediaPhoto(open("imagens/start_image.png", "rb"), caption=time)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time_portugues())
         case "botao_redes":
             redes="""Nossa Historia
             """
             
-            media = types.InputMediaPhoto(open("FURIA_FULL.png", "rb"), caption=redes)
+            media = types.InputMediaPhoto(open("imagens/start_image.png", "rb"), caption=redes)
             bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=teclado_portugues())
         case "botao_estilo":
             estilo="""Nossa Historia
             """
             
-            media = types.InputMediaPhoto(open("FURIA_FULL.png", "rb"), caption=estilo)
+            media = types.InputMediaPhoto(open("imagens/start_image.png", "rb"), caption=estilo)
             bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=teclado_portugues())
         case "botao_voltar":
             bot.delete_message(call.message.chat.id, call.message.message_id)
             enviar_tela_inicial(call.message.chat.id)
 
-        #Menu do Time
+        #Menu do Time - Portugues
         case "botao_fallen":
-            fallen="""Nossa Historia
+            fallen="""🇧🇷 FalleN "O Professor"
+
+Gabriel "FalleN" Toledo (nascido em 30 de maio de 1991) é considerado um dos maiores jogadores de Counter-Strike da história do Brasil e do mundo, tendo sido eleito o segundo melhor jogador do mundo em 2016 e o quinto em 2017. Além dos seus dois títulos de major, FalleN também conquistou vários outros prêmios e reconhecimentos ao longo da sua carreira, incluindo uma vaga no hall da fama do CS:GO. Desde 03 de julho de 2023 atua como capitan-in-game no time de CS2 da FURIA
+
+Siga FaleN em suas redes sociais:
+Instagram: https://www.instagram.com/fallen/
+X (Antigo Twiter): https://x.com/FalleNCS
             """
-            media = types.InputMediaPhoto(open("FURIA_FULL.png", "rb"), caption=fallen)
-            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time())  
+            media = types.InputMediaPhoto(open("imagens/time/fallen_image.jpg", "rb"), caption=fallen)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time_portugues())  
+        
         case "botao_molodoy":
-            moloy="""Nossa Historia
-            """
-            media = types.InputMediaPhoto(open("FURIA_FULL.png", "rb"), caption=moloy)
-            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time())
+            molodoy="""🇰🇿 molodoy 
+
+Danil "molodoy" Golubenko (nascido em 10 de janeiro de 2005) 
+
+Siga molodoy em suas redes sociais:
+Instagram:  
+X (Antigo Twiter):  
+"""
+            media = types.InputMediaPhoto(open("imagens/time/molodoy_image.jpeg", "rb"), caption=molodoy)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time_portugues())
+        
         case "botao_yuurih":
-            yuurih="""Nossa Historia
-            """
-            media = types.InputMediaPhoto(open("FURIA_FULL.png", "rb"), caption=yuurih)
-            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time())  
+            yuurih="""🇧🇷 YUURIH 
+
+Yuri "YUURIH" Boian (nascido em 22 de dezembro de 1999) 
+
+Siga YUURIH em suas redes sociais:
+Instagram:  
+X (Antigo Twiter): 
+"""
+            media = types.InputMediaPhoto(open("imagens/time/yuurih_image.jpeg", "rb"), caption=yuurih)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time_portugues())  
+        
         case "botao_yekindar":
-            yekindar="""Nossa Historia
-            """
-            media = types.InputMediaPhoto(open("FURIA_FULL.png", "rb"), caption=yekindar)
-            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time()) 
+            yekindar="""🇱🇻 YEKINDAR 
+
+Mareks "YEKINDAR" Gaļinskis (nascido em 04 de outubro de 1999) 
+
+Siga YEKINDAR em suas redes sociais:
+Instagram:  
+X (Antigo Twiter):  
+"""
+            media = types.InputMediaPhoto(open("imagens/time/yekindar_image.jpeg", "rb"), caption=yekindar)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time_portugues()) 
+        
         case "botao_kscerato":
-            kscerato="""Nossa Historia
-            """  
-            media = types.InputMediaPhoto(open("FURIA_FULL.png", "rb"), caption=kscerato)
-            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time())
-        case "botao_hepa":
-            hepa="""Nossa Historia
-            """
-            media = types.InputMediaPhoto(open("FURIA_FULL.png", "rb"), caption=hepa)
-            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time())     
-        case "botao_sidde":
-            sidde="""Nossa Historia
-            """  
-            media = types.InputMediaPhoto(open("FURIA_FULL.png", "rb"), caption=sidde)
-            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time())
-                        
+            kscerato="""🇧🇷 KSCERATO 
+
+Kaike "KSCERATO" Cerato (nascido em 12 de dezembro de 1999) 
+
+Siga KSCERATO em suas redes sociais:
+Instagram:  
+X (Antigo Twiter):  
+"""
+            media = types.InputMediaPhoto(open("imagens/time/kscerato_image.jpg", "rb"), caption=kscerato)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time_portugues())
+                    
 bot.infinity_polling()
 
 
