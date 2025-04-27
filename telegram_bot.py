@@ -8,14 +8,16 @@ bot = telebot.TeleBot(CHAVE_API)
 def teclado_inicial():
     teclado = types.InlineKeyboardMarkup()
     
-    botao_sobre = types.InlineKeyboardButton("Sobre nós", callback_data="botao_sobre")
-    botao_historia = types.InlineKeyboardButton("Nossa História", callback_data="botao_historia") 
-    botao_time = types.InlineKeyboardButton("🏆 Nosso Time", callback_data="botao_time")
-    botao_redes = types.InlineKeyboardButton("🎥 Nossas Redes Sociais", callback_data="botao_redes")
-    botao_loja = types.InlineKeyboardButton("🛒 Lojinha da Pantera", callback_data="botao_loja")
+    botao_historia = types.InlineKeyboardButton("📜Nossa História", callback_data="botao_historia") 
+    botao_time = types.InlineKeyboardButton("🏆Nosso Time", callback_data="botao_time")
+    botao_whatsapp = types.InlineKeyboardButton("Bot Whatsapp", callback_data="botao_whatsapp")   
+    botao_redes = types.InlineKeyboardButton("🎥Redes Sociais", callback_data="botao_redes")
+    botao_loja = types.InlineKeyboardButton("🛒Lojinha da Pantera", callback_data="botao_loja")
+    botao_contato = types.InlineKeyboardButton("Contate-nos", callback_data="botao_contato")
 
-    teclado.add(botao_sobre, botao_historia)
-    teclado.add(botao_time, botao_redes)
+    teclado.add(botao_time, botao_historia)
+    teclado.add(botao_whatsapp, botao_redes)
+    teclado.add(botao_contato)
     teclado.add(botao_loja)
 
     teclado.add(types.InlineKeyboardButton("Voltar", callback_data="botao_voltar"))
@@ -36,7 +38,7 @@ Vem ganhar junto com a FURIA! 👊
 @bot.message_handler(commands=["start","help"])
 def start(mensagem):
         
-    with open("imagens/start_image.png", "rb") as foto:
+    with open("imagens/menu/furia_start_image.png", "rb") as foto:
         bot.send_photo(
             mensagem.chat.id,
             foto,
@@ -45,7 +47,7 @@ def start(mensagem):
         )
 
 def enviar_menu(chat_id):
-        with open("imagens/start_image.png", "rb") as foto:
+        with open("imagens/menu/furia_start_image.png", "rb") as foto:
             bot.send_photo(
             chat_id,
             foto,
@@ -74,47 +76,52 @@ def menu_loja():
     
     teclado = types.InlineKeyboardMarkup()
     
-    botao_adidas = types.InlineKeyboardButton("Adidas + Furia", callback_data="botao_adidas")        
+    botao_adidas = types.InlineKeyboardButton("Adidas X Furia", callback_data="botao_adidas")        
     botao_batman = types.InlineKeyboardButton("Batman", callback_data="botao_batman")        
     botao_champion = types.InlineKeyboardButton("Champion", callback_data="botao_champion")        
     botao_future = types.InlineKeyboardButton("Future is Black", callback_data="botao_future")        
     botao_hero = types.InlineKeyboardButton("My Hero Academia", callback_data="botao_hero")        
     botao_zor = types.InlineKeyboardButton("Zor", callback_data="botao_zor")  
+    botao_love = types.InlineKeyboardButton("Hard to Love X Harder to Kill", callback_data="botao_love")  
+    botao_classic = types.InlineKeyboardButton("Classic", callback_data="botao_classic")  
+    botao_new_era = types.InlineKeyboardButton("Furia X New Era", callback_data="botao_new_era")  
+    botao_phantera = types.InlineKeyboardButton("Magic Panthera", callback_data="botao_phantera")  
        
     
     teclado.add(botao_adidas, botao_batman)
     teclado.add(botao_champion, botao_future)
     teclado.add(botao_hero, botao_zor)
+    teclado.add(botao_love, botao_classic)
+    teclado.add(botao_new_era, botao_phantera)
+
     teclado.add(types.InlineKeyboardButton("Voltar", callback_data="botao_voltar"))        
     return teclado
     
 @bot.callback_query_handler(func=lambda call:True)
 def acionamento_botao(call:types.CallbackQuery):
 
-    match call.data:
-        #Menu principal 
-        case "botao_sobre":
-            sobre = """📜Acompanhe a nossa trajetoria até aqui📜 
+#Conteudo - Menu Inicial 
+    sobre = """📜Acompanhe a nossa trajetoria até aqui📜 
             
-            """
-            media = types.InputMediaPhoto(open("imagens/start_image.png", "rb"), caption=sobre)
-            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=teclado_inicial())
-        case "botao_historia":
-            historia="""📜Fala 
-            
-            
-            
-            """
-            media = types.InputMediaPhoto(open("imagens/start_image.png", "rb"), caption=historia)
-            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=teclado_inicial())
-        case "botao_time":
-            time="""Nossa Historia
-            
-            """
-            media = types.InputMediaPhoto(open("imagens/start_image.png", "rb"), caption=time)
-            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time())
-        case "botao_redes":
-            redes="""Não perca nenhuma atualização sobre a Furia🔥
+    """
+    historia="""
+A FURIA Esports nasceu em 2017 e rapidamente se firmou como uma das grandes potências do CS:GO mundial. Conhecida por seu estilo agressivo e pela paixão inabalável, a organização ganhou respeito e admiração dentro e fora dos servidores. Com nomes como yuurih e KSCERATO, construiu campanhas históricas em grandes torneios, sempre carregando a identidade ousada que define a FURIA. Na transição para o CS2, o time manteve sua essência competitiva, adaptando-se ao novo jogo sem perder o espírito de luta. 
+
+A trajetória da FURIA é mais do que resultados: é sobre inspirar uma geração e mostrar ao mundo a força do Brasil. 
+              
+    """
+    time="""Nossa Historia
+    
+    """
+    
+    whatsapp="""
+    
+    
+    
+    https://api.whatsapp.com/send/?phone=5511993404466&text&type=phone_number&app_absent=0
+    """
+    
+    redes="""Não perca nenhuma atualização sobre a Furia🔥
 
 Nos siga em nossas redes socias, basta clicar nos links abaixo
     
@@ -123,117 +130,71 @@ Twiter: https://x.com/FURIA
 Youtube: https://www.youtube.com/@FURIAgg 
 Facebook: www.facebook.com/furiagg 
 
-            """
-            media = types.InputMediaPhoto(open("imagens/start_image.png", "rb"), caption=redes)
-            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=teclado_inicial())
-        case "botao_loja":
-            loja="""loja
-            
-            
-            """
-            media = types.InputMediaPhoto(open("imagens/start_image.png", "rb"), caption=loja)
-            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_loja())
-        case "botao_voltar":
-            bot.delete_message(call.message.chat.id, call.message.message_id)
-            enviar_menu(call.message.chat.id)
+    """
+    loja="""loja
 
-        #Menu do Time
-        case "botao_fallen":
-            fallen="""🇧🇷 FalleN "O Professor"
+https://www.furia.gg/
+    """
+    
+#Conteudo - Time    
+    fallen="""🇧🇷 FalleN "O Professor"
 
 Gabriel "FalleN" Toledo (nascido em 30 de maio de 1991) é considerado um dos maiores jogadores de Counter-Strike da história do Brasil e do mundo, tendo sido eleito o segundo melhor jogador do mundo em 2016 e o quinto em 2017. Além dos seus dois títulos de major, FalleN também conquistou vários outros prêmios e reconhecimentos ao longo da sua carreira, incluindo uma vaga no hall da fama do CS:GO. Desde 03 de julho de 2023 atua como capitan-in-game no time de CS2 da FURIA
 
 Siga FaleN em suas redes sociais:
 Instagram: https://www.instagram.com/fallen/
 X (Antigo Twiter): https://x.com/FalleNCS
-            """
-            media = types.InputMediaPhoto(open("imagens/time/fallen_image.jpg", "rb"), caption=fallen)
-            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time())  
-        
-        case "botao_molodoy":
-            molodoy="""🇰🇿 molodoy 
+    """
+    molodoy="""🇰🇿 molodoy 
 
 Danil "molodoy" Golubenko (nascido em 10 de janeiro de 2005) é o promissor jovem que se destacou como AWPer nos campeonatos do Cazaquistão, tendo ingressado na organização FURIA Esports em 11 de abril de 2025, sua partida de estreia será justamente no Cazaquistão, onde a Furia disputará a PGL Astana 2025 entre os dias 10 e 18 de maio.
     
 Siga molodoy em suas redes sociais: 
 X (Antigo Twiter): https://x.com/tvoy_molodoy  
-"""
-            media = types.InputMediaPhoto(open("imagens/time/molodoy_image.jpeg", "rb"), caption=molodoy)
-            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time())
-        
-        case "botao_yuurih":
-            yuurih="""🇧🇷 YUURIH 
+    """
+    yuurih="""🇧🇷 YUURIH 
 
 Yuri "YUURIH" Boian (nascido em 22 de dezembro de 1999) é conhecido por suas atuações em grande nível e por sua história de dedicação ao esporte. YUURIH faz parte da organização FURIA Esports desde 08 de novembro de 2017 e já alcançou a marca de 1000 mapas disputados com a FURIA, sendo atualmente o jogador ativo mais antigo na equipe. 
 
 Siga YUURIH em suas redes sociais:
 Instagram: https://www.instagram.com/yuurihfps/  
 X (Antigo Twiter): https://x.com/yuurih 
-"""
-            media = types.InputMediaPhoto(open("imagens/time/yuurih_image.jpeg", "rb"), caption=yuurih)
-            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time())  
-        
-        case "botao_yekindar":
-            yekindar="""🇱🇻 YEKINDAR 
+    """
+    yekindar="""🇱🇻 YEKINDAR 
 
 Mareks "YEKINDAR" Gaļinskis (nascido em 04 de outubro de 1999) é amplamente reconhecido por seu estilo de jogo agressivo como entry fragger. YEKINDAR é conhecido por sua capacidade de abrir espaços para sua equipe, sua mira precisa e sua habilidade em situações de clutch. Em 22 de abril de 2025 ingressou na organização Furia Esports como Stand-in. 
 
 Siga YEKINDAR em suas redes sociais:
 Instagram: https://www.instagram.com/yek1ndar/  
 X (Antigo Twiter): https://x.com/yek1ndar  
-"""
-            media = types.InputMediaPhoto(open("imagens/time/yekindar_image.jpeg", "rb"), caption=yekindar)
-            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time()) 
-        
-        case "botao_kscerato":
-            kscerato="""🇧🇷 KSCERATO 
+    """
+    kscerato="""🇧🇷 KSCERATO 
 
 Kaike "KSCERATO" Cerato (nascido em 12 de dezembro de 1999) é conhecido por ser um jogador consistente e crucial para a equipe. Sua forte sinergia com companheiros de equipe como YUURIH tem sido um fator chave no sucesso da FURIA ao longo dos anos. KSCERATO faz parte da organização Furia Esports desde 06 de fevereiro de 2018, sendo o segundo jogador ativo mais antigo da Furia, atrás somente de YUURIH.
 
 Siga KSCERATO em suas redes sociais:
 Instagram: https://www.instagram.com/kscerato  
 X (Antigo Twiter): https://x.com/kscerato  
+    """
+    
+#Conteúdo - Loja    
+    adidas="""
+Parceria exclusiva com a renomada marca de artigos esportivos Adidas, patrocinadora oficial da FURIA e responsável pela confecção dos nossos uniformes.    
 """
-            media = types.InputMediaPhoto(open("imagens/time/kscerato_image.jpg", "rb"), caption="")
-            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_loja())
-        
-        case "botao_adidas":
-            adidas = """ 
-            
-            """
-            media = types.InputMediaPhoto(open("imagens/loja/furia_adidas_image.jpg", "rb"), caption=adidas)
-            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_loja())
-                  
-        case "botao_batman":
-            batman="""
-            
-            """
-            media = types.InputMediaPhoto(open("imagens/loja/furia_batman_image.jpg", "rb"), caption=batman)
-            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_loja())
-            
-        case "botao_champion":
-            champion="""
-            
-            """
-            media = types.InputMediaPhoto(open("imagens/loja/furia_champion_image.jpg", "rb"), caption=champion)
-            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_loja())
-            
-        case "botao_future":                                        
-            future="""
-            
-            """
-            media = types.InputMediaPhoto(open("imagens/loja/furia_future_is_black_image.jpg", "rb"), caption=future)
-            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_loja())
-                            
-        case "botao_hero":  
-            hero="""
-            
-            """
-            media = types.InputMediaPhoto(open("imagens/loja/furia_my_hero_academia_image.jpg", "rb"), caption=hero)
-            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_loja())
-            
-        case "botao_zor":
-            zor="""
+    batman="""
+Fruto de uma colaboração com a DC Comics, a coleção FURIA x Batman celebra os 85 anos do Cavaleiro das Trevas. Lançada inicialmente em 2022, a linha inclui camisetas, moletons, jaquetas e acessórios com elementos que unem a estética sombria do Batman à identidade da FURIA. A coleção foi reconhecida com o prêmio de Inovação pela Warner Bros. em 2023.    
+    """
+    champion="""
+Colaboração com a tradicional marca esportiva americana Champion. Traz jaquetas estilo college, moletons e camisetas que misturam o estilo clássico norte-americano com a identidade esportiva e urbana da FURIA. As peças carregam bordados e tecidos premium, focadas em quem busca um visual autêntico, vintage e esportivo.
+    """   
+    future="""
+Coleção lançada como um manifesto contra o racismo, em parceria com os artistas de grafite Irmãos Credo. As peças valorizam a cultura negra, utilizando elementos como grafismos africanos e tons dourados, marca registrada da FURIA.A linha inclui camisetas, calças e moletons, todos produzidos no Brasil, com foco em inclusão, identidade e orgulho racial.    """
+    
+    hero="""
+Parceria com o anime "My Hero Academia" (Boku no Hero), focada em fãs da cultura pop japonesa e esports. A coleção traz camisetas, moletons e jaquetas com estampas de personagens icônicos como Deku, Bakugo e Todoroki. A linha mistura elementos do anime com o logo e o estilo urbano da FURIA, conquistando o público jovem e geek.
+    """
+    
+    zor="""
 A collab FURIA x ZOR une o estilo western ao lifestyle de Brino, influenciador conhecido por sua autenticidade. Inspirada no clipe "Todo Mundo Tá Tão Bem", a coleção traz peças que celebram a liberdade e as raízes do oeste americano, com toque urbano e moderno.
 
 Com cores como cinza chumbo, preto, verde, bege e marrom, a linha mistura o casual com o funcional. Cada peça foi criada para contar uma história e refletir o estilo único de Brino, com modelagens marcantes e estampas exclusivas.
@@ -241,9 +202,89 @@ Com cores como cinza chumbo, preto, verde, bege e marrom, a linha mistura o casu
 A coleção já está disponível em edição limitada no nosso site. Garanta a sua e mostre seu estilo com atitude!
 
 Clique neste link para acessar a coleção: www.furia.gg/produtos/collabs/zor
+    """ 
+   
+    love="""
+Esta coleção apresenta uma estética urbana e ousada, com peças como camisetas, moletons e croppeds. Os designs trazem frases impactantes e cores sóbrias, refletindo a resiliência e atitude da comunidade FURIA. Destaques incluem o Moletom Careca Azul Petróleo e a Camiseta Oversized Off White.        
+    """
+    classic="""
+    Linha essencial da FURIA, com camisetas e moletons em cores neutras e design minimalista, ideal para quem busca versatilidade sem abrir mão da identidade da marca.
+    """
+    new_era="""
+Em agosto de 2023, a FURIA anunciou uma parceria com a renomada marca de headwear New Era, lançando uma coleção exclusiva de bonés e buckets. A linha inclui modelos clássicos como 9FIFTY, 9FORTY e 59FIFTY, essa colaboração visa integrar o estilo urbano ao universo gamer, reforçando o posicionamento da FURIA no segmento de lifestyle    
+    """
+    panthera="""
+Parceria com o artista Guilherme Lemes, conhecido por misturar arte contemporânea com símbolos místicos. A "panthera" (pantera) é utilizada como símbolo de força, mistério e resistência. As peças têm uma vibe artística, com estampas exclusivas, camisetas, moletons e shorts, unindo streetwear com arte moderna. Reflete a ideia da FURIA como um movimento sociocultural, não apenas uma organização de esports.    
+    """
+    
+    match call.data:
+        #Menu principal 
+        case "botao_historia":    
+            media = types.InputMediaPhoto(open("imagens/menu/furia_historia_image.jpg", "rb"), caption=historia)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=teclado_inicial())
+        case "botao_time":
+            media = types.InputMediaPhoto(open("imagens/menu/furia_time_image.jpg", "rb"), caption=time)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time())
+        case "botao_whatsapp":
+            media = types.InputMediaPhoto(open(" ", "rb"), caption=whatsapp)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=teclado_inicial())
+        case "botao_redes":
+            media = types.InputMediaPhoto(open(" ", "rb"), caption=redes)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=teclado_inicial())
+        case "botao_loja":
+            media = types.InputMediaPhoto(open("imagens/loja/furia_loja_image.jpg", "rb"), caption=loja)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_loja())
+        case "botao_voltar":
+            bot.delete_message(call.message.chat.id, call.message.message_id)
+            enviar_menu(call.message.chat.id)
 
-            """                      
+        #Menu do Time
+        case "botao_fallen":
+            media = types.InputMediaPhoto(open("imagens/time/fallen_image.jpg", "rb"), caption=fallen)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time())  
+        case "botao_molodoy":
+            media = types.InputMediaPhoto(open("imagens/time/molodoy_image.jpeg", "rb"), caption=molodoy)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time())
+        case "botao_yuurih":
+            media = types.InputMediaPhoto(open("imagens/time/yuurih_image.jpeg", "rb"), caption=yuurih)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time())      
+        case "botao_yekindar":
+            media = types.InputMediaPhoto(open("imagens/time/yekindar_image.jpeg", "rb"), caption=yekindar)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time())         
+        case "botao_kscerato":
+            media = types.InputMediaPhoto(open("imagens/time/kscerato_image.jpg", "rb"), caption=kscerato)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_time())
+        
+        #Menu das Coleções
+        case "botao_adidas":
+            media = types.InputMediaPhoto(open("imagens/loja/furia_adidas_image.jpg", "rb"), caption=adidas)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_loja())
+        case "botao_batman":
+            media = types.InputMediaPhoto(open("imagens/loja/furia_batman_image.jpg", "rb"), caption=batman)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_loja())
+        case "botao_champion":
+            media = types.InputMediaPhoto(open("imagens/loja/furia_champion_image.jpg", "rb"), caption=champion)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_loja())
+        case "botao_future":                                        
+            media = types.InputMediaPhoto(open("imagens/loja/furia_future_is_black_image.jpg", "rb"), caption=future)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_loja())                   
+        case "botao_hero":  
+            media = types.InputMediaPhoto(open("imagens/loja/furia_my_hero_academia_image.jpg", "rb"), caption=hero)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_loja())     
+        case "botao_zor":                     
             media = types.InputMediaPhoto(open("imagens/loja/furia_zor_image.jpg", "rb"), caption=zor)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_loja())            
+        case "botao_love":
+            media = types.InputMediaPhoto(open("imagens/loja/furia_hard_to_love_image.jpg", "rb"), caption=love)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_loja())            
+        case "botao_classic":    
+            media = types.InputMediaPhoto(open("imagens/loja/furia_classic_image.jpg", "rb"), caption=classic)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_loja())            
+        case "botao_new_era":
+            media = types.InputMediaPhoto(open("imagens/loja/furia_new_era_image.jpg", "rb"), caption=new_era)
+            bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_loja())                       
+        case "botao_panthera":    
+            media = types.InputMediaPhoto(open("imagens/loja/furia_panthera_image.jpg", "rb"), caption=panthera)
             bot.edit_message_media(media, chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=menu_loja())            
 
 bot.infinity_polling()
