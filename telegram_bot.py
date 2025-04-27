@@ -82,8 +82,6 @@ def menu_loja():
         ]
     return criar_botoes_loja(lista_botoes)  
     
-
-    
 acoes = {
     "botao_historia": ("historia", teclado_inicial),
     "botao_time": ("time", menu_time),
