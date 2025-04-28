@@ -4,6 +4,9 @@ from conteudos import boas_vindas, time, historia, whatsapp, redes, loja, contat
 from conteudos import fallen, molodoy, yuurih, yekindar, kscerato
 from conteudos import adidas, batman, champion, future, hero, zor, love, classic, new_era, panthera
 from caminhos import imagens
+from keep_alive import keep_alive
+
+keep_alive()
 
 CHAVE_API = "7590710509:AAFJr53U0eGHHkiLWuf0yA1uWnkshZzj-yo"
 
