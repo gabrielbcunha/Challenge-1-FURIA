@@ -1,9 +1,7 @@
 import telebot
 from telebot import types
-from conteudos import boas_vindas, time, historia, whatsapp, redes, loja, contato
-from conteudos import fallen, molodoy, yuurih, yekindar, kscerato
-from conteudos import adidas, batman, champion, future, hero, zor, love, classic, new_era, panthera
-from caminhos import imagens
+
+
 from utils.keep_alive import keep_alive
 from dotenv import load_dotenv
 import os
