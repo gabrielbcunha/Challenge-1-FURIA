@@ -93,7 +93,6 @@ handlers = {
     "botao_redes": (redes.handler_redes, teclado_inicial),
     "botao_loja": (loja.handler_loja, teclado_inicial),
     "botao_contato": (contato.handler_contato, teclado_inicial),
-    "botao_voltar": "",
     
     "botao_fallen": (fallen.handler_fallen, menu_time),  
     "botao_molodoy": (molodoy.handler_molodoy, menu_time),  
@@ -116,10 +115,11 @@ handlers = {
 @bot.callback_query_handler(func=lambda call: True)        
 def acionamento_botao(call:types.CallbackQuery):    
     if call.data in handlers:
-        content = handlers[call.data]()
+        handler_func, teclado_func = handlers[call.data]
+        content = handler_func()
         if isinstance(content, dict) and "imagem" in content:
             with open(content["imagem"], "rb") as imagem:
-                bot.send_photo(call.message.chat.id, imagem, caption=content["text"])
+                bot.send_photo(call.message.chat.id, imagem, caption=content["text"], reply_markup=teclado_func())
         
     elif call.data == "botao_voltar":
         bot.delete_message(call.message.chat.id, call.message.message_id)
