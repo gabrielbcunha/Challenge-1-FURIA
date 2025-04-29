@@ -1,4 +1,4 @@
-def adidas():
+def handler_adidas():
     return{
         "texto":(
 """Furia X Adidas

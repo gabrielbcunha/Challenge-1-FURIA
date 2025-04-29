@@ -1,4 +1,4 @@
-def panthera():
+def handler_panthera():
     return{
         "texto":(
 """Magic Panthera 🐾

@@ -1,4 +1,4 @@
-def contato():
+def handler_contato():
     return{
         "texto":(
 """Aqui a sua voz também faz parte da FURIA! 🔥

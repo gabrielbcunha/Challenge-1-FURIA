@@ -1,4 +1,4 @@
-def yekindar():
+def handler_yekindar():
     return{
         "texto":(
 """🇱🇻 YEKINDAR 

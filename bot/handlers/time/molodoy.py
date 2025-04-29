@@ -1,4 +1,4 @@
-def molodoy():
+def handler_molodoy():
     return{
         "texto":(
 """🇰🇿 molodoy 

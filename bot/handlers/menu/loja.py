@@ -1,4 +1,4 @@
-def loja():
+def handler_loja():
     return{
         "texto":(
 """Quer vestir a camisa da FURIA e mostrar toda sua paixão? 🔥

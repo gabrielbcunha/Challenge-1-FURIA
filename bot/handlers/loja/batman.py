@@ -1,4 +1,4 @@
-def batman():
+def handler_batman():
     return{
         "texto":(
 """Furia X Batman 🦇

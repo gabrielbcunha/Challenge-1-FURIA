@@ -1,4 +1,4 @@
-def whatsapp():
+def handler_whatsapp():
     return{
         "texto":(
 """Tá pronto pra ficar ainda mais perto da FURIA? 😎🔥

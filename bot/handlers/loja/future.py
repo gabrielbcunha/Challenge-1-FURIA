@@ -1,4 +1,4 @@
-def future():
+def handler_future():
     return{
         "texto":(
 """Future is Black 🖤

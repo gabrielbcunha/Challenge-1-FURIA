@@ -1,4 +1,4 @@
-def redes():
+def handler_redes():
     return{
         "texto":(
 """Quer ficar por dentro de tudo que rola na FURIA?🔥

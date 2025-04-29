@@ -1,4 +1,4 @@
-def new_era():
+def handler_new_era():
     return{
         "texto":(
 """Furia X New Era 🎮

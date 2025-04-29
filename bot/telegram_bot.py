@@ -1,7 +1,8 @@
 import telebot
 from telebot import types
-
-
+from handlers.menu import historia, time, whatsapp, redes, loja, contato
+from handlers.time import fallen, kscerato, molodoy, yekindar, yuurih 
+from handlers.loja import adidas, batman, champion, classic, future, hero, love, new_era, panthera, zor
 from utils.keep_alive import keep_alive
 from dotenv import load_dotenv
 import os
@@ -22,7 +23,6 @@ def teclado_inicial():
     botao_redes = types.InlineKeyboardButton("🎥Redes Sociais", callback_data="botao_redes")
     botao_loja = types.InlineKeyboardButton("🛒Lojinha da Pantera", callback_data="botao_loja")
     botao_contato = types.InlineKeyboardButton("✉️Contate-nos", callback_data="botao_contato")
-
     teclado.add(botao_time, botao_historia)
     teclado.add(botao_whatsapp, botao_redes)
     teclado.add(botao_loja)
@@ -38,7 +38,7 @@ def start(mensagem):
         bot.send_photo(
             mensagem.chat.id,
             foto,
-            caption=boas_vindas,
+            caption="boas_vindas",
             reply_markup=teclado_inicial()
         )
 
@@ -47,7 +47,7 @@ def enviar_menu(chat_id):
             bot.send_photo(
             chat_id,
             foto,
-            caption=boas_vindas,
+            caption="Bem vindo",
             reply_markup=teclado_inicial()
         )
 
@@ -86,45 +86,41 @@ def menu_loja():
         ]
     return criar_botoes_loja(lista_botoes)  
     
-acoes = {
-    "botao_historia": ("historia", teclado_inicial),
-    "botao_time": ("time", menu_time),
-    "botao_whatsapp": ("whatsapp", teclado_inicial),
-    "botao_redes": ("redes", teclado_inicial),
-    "botao_loja": ("loja", menu_loja),
-    "botao_contato": ("contato", teclado_inicial),
-    "botao_voltar": ("boas_vindas", teclado_inicial),
+handlers = {
+    "botao_historia": (historia.handler_historia, teclado_inicial),
+    "botao_time": (time.handler_time, teclado_inicial),
+    "botao_whatsapp": (whatsapp.handler_whatsapp, teclado_inicial),  
+    "botao_redes": (redes.handler_redes, teclado_inicial),
+    "botao_loja": (loja.handler_loja, teclado_inicial),
+    "botao_contato": (contato.handler_contato, teclado_inicial),
+    "botao_voltar": "",
     
-    "botao_fallen": ("fallen",menu_time),
-    "botao_molodoy": ("molodoy", menu_time),
-    "botao_yuurih": ("yuurih", menu_time),
-    "botao_yekindar": ("yekindar", menu_time),
-    "botao_kscerato": ("kscerato", menu_time),
+    "botao_fallen": (fallen.handler_fallen, menu_time),  
+    "botao_molodoy": (molodoy.handler_molodoy, menu_time),  
+    "botao_yuurih": (yuurih.handler_yuurih, menu_time),
+    "botao_yekindar": (yekindar.handler_yekindar, menu_time),
+    "botao_kscerato": (kscerato.handler_kscerato, menu_time),
     
-    "botao_adidas": ("adidas", menu_loja),
-    "botao_batman": ("batman", menu_loja),
-    "botao_champion": ("champion", menu_loja),
-    "botao_future": ("future", menu_loja),
-    "botao_hero": ("hero", menu_loja),
-    "botao_zor": ("zor", menu_loja),
-    "botao_love": ("love", menu_loja),
-    "botao_classic": ("classic", menu_loja),
-    "botao_new_era": ("new_era", menu_loja),
-    "botao_panthera": ("panthera", menu_loja),
+    "botao_adidas": (adidas.handler_adidas, menu_loja), 
+    "botao_batman": (batman.handler_batman, menu_loja), 
+    "botao_champion": (champion.handler_champion, menu_loja),  
+    "botao_future": (future.handler_future, menu_loja), 
+    "botao_hero": (hero.handler_hero, menu_loja),  
+    "botao_zor": (zor.handler_zor, menu_loja), 
+    "botao_love": (love.handler_love, menu_loja), 
+    "botao_classic": (classic.handler_classic, menu_loja), 
+    "botao_new_era": (new_era.handler_new_era, menu_loja), 
+    "botao_panthera": (panthera.handler_panthera, menu_loja),  
 }
 
 @bot.callback_query_handler(func=lambda call: True)        
 def acionamento_botao(call:types.CallbackQuery):    
-    conteudo, teclado_func = acoes.get(call.data, (None, None))
-    if conteudo:
-        with open(imagens[call.data], "rb") as foto:
-            media = types.InputMediaPhoto(foto, caption=globals()[conteudo])
-            bot.edit_message_media(
-                media,
-                chat_id=call.message.chat.id,
-                message_id=call.message.message_id,
-                reply_markup=teclado_func()
-            )
+    if call.data in handlers:
+        content = handlers[call.data]()
+        if isinstance(content, dict) and "imagem" in content:
+            with open(content["imagem"], "rb") as imagem:
+                bot.send_photo(call.message.chat.id, imagem, caption=content["text"])
+        
     elif call.data == "botao_voltar":
         bot.delete_message(call.message.chat.id, call.message.message_id)
         enviar_menu(call.message.chat.id)  

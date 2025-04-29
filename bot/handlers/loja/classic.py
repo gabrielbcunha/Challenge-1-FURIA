@@ -1,4 +1,4 @@
-def classic():
+def handler_classic():
     return{
         "texto":(
 """Furia Classic 🐾

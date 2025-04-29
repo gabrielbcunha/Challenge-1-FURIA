@@ -1,4 +1,4 @@
-def boas_vindas():
+def handler_boas_vindas():
     return{
         "texto":(
 """🐾 Fala, guerreiro(a)!

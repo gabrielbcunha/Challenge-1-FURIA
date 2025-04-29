@@ -1,4 +1,4 @@
-def fallen():
+def handler_fallen():
     return{
         "texto":(
 """🇧🇷 FalleN "O Professor"

@@ -1,4 +1,4 @@
-def kscerato():
+def handler_kscerato():
     return{
         "texto":(
 """🇧🇷 KSCERATO 

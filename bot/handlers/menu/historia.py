@@ -1,4 +1,4 @@
-def historia():
+def handler_historia():
     return{
         "texto":(
 """Venha conhecer mais sobre a História da FURIA 🔥

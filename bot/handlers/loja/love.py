@@ -1,4 +1,4 @@
-def love():
+def handler_love():
     return{
         "texto":(
 """❤️Hard to Love X Harder to Kill💔

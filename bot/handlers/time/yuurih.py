@@ -1,4 +1,4 @@
-def yuurih():
+def handler_yuurih():
     return{
         "texto":(
 """🇧🇷 YUURIH 

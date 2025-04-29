@@ -1,4 +1,4 @@
-def champion():
+def handler_champion():
     return{
         "texto":(
 """Furia X Champion 🏆

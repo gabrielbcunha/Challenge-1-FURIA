@@ -1,4 +1,4 @@
-def zor():
+def handler_zor():
     return{
         "texto":(
 """Furia X Zor 🐾

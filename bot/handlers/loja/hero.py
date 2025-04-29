@@ -1,4 +1,4 @@
-def hero():
+def handler_hero():
     return{
         "texto":(
 """Furia X My Hero Academia ⛩❤️🎮

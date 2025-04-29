@@ -1,4 +1,4 @@
-def time():
+def handler_time():
     return{
         "texto":(
 """Quer conhecer ainda mais os nossos jogadores? 🔥
