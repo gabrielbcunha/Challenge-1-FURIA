@@ -31,25 +31,27 @@ def teclado_inicial():
     teclado.add(types.InlineKeyboardButton("⬅️Voltar", callback_data="botao_voltar"))
     return teclado
 
-start = {
-    "boas_vindas": (bem_vindo.handler_boas_vindas)
-}
-
 @bot.message_handler(commands=["start","help"])
 def start(mensagem):
-        
-    with open(start["imagem"], "rb") as imagem:
-        bot.send_photo(mensagem.chat.id, imagem, caption=start["texto"], reply_markup=teclado_inicial())
-        
-
-def enviar_menu(chat_id):
-    with open(bem_vindo["imagem"], "rb") as foto:
+    dados = bem_vindo.handler_boas_vindas()
+    with open(dados["imagem"], "rb") as imagem:
         bot.send_photo(
-            chat_id,
-            foto,
-            caption=bem_vindo["texto"],
+            mensagem.chat.id, 
+            imagem, 
+            caption=start["texto"], 
             reply_markup=teclado_inicial()
         )
+        
+def enviar_menu(chat_id):
+    dados = bem_vindo.handler_boas_vindas()
+    with open(dados["imagem"], "rb") as imagem:
+        bot.send_photo(
+            chat_id, 
+            imagem, 
+            caption=start["texto"], 
+            reply_markup=teclado_inicial()
+        )
+        
 
 def criar_botoes_time(lista_botoes):
     teclado = types.InlineKeyboardMarkup()
