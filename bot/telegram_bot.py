@@ -5,12 +5,15 @@ from conteudos import fallen, molodoy, yuurih, yekindar, kscerato
 from conteudos import adidas, batman, champion, future, hero, zor, love, classic, new_era, panthera
 from caminhos import imagens
 from utils.keep_alive import keep_alive
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+TOKEN = os.getenv("CHAVE_API")
 
 keep_alive()
 
-CHAVE_API = "7590710509:AAFJr53U0eGHHkiLWuf0yA1uWnkshZzj-yo"
-
-bot = telebot.TeleBot(CHAVE_API)
+bot = telebot.TeleBot(TOKEN)
 
 def teclado_inicial():
     teclado = types.InlineKeyboardMarkup()
@@ -33,7 +36,7 @@ def teclado_inicial():
 @bot.message_handler(commands=["start","help"])
 def start(mensagem):
         
-    with open("imagens/menu/furia_start_image.png", "rb") as foto:
+    with open("static/imagens/menu/furia_start_image.png", "rb") as foto:
         bot.send_photo(
             mensagem.chat.id,
             foto,
@@ -42,7 +45,7 @@ def start(mensagem):
         )
 
 def enviar_menu(chat_id):
-        with open("imagens/menu/furia_start_image.png", "rb") as foto:
+        with open("static/imagens/menu/furia_start_image.png", "rb") as foto:
             bot.send_photo(
             chat_id,
             foto,
@@ -77,10 +80,10 @@ def criar_botoes_loja(lista_botoes):
 def menu_loja():        
     lista_botoes = [
         [("Adidas X Furia", "botao_adidas")], 
-        [("Batman", "botao_batman")], [("Champion", "botao_champion")],
-        [("Future is Black", "botao_future")], [("My Hero Academia", "botao_hero")],
-        [("Zor", "botao_zor")],  [("Classic", "botao_classic")],
-        [("Furia X New Era", "botao_new_era")], [("Magic Panthera", "botao_panthera")],
+        [("Batman", "botao_batman"), ("Champion", "botao_champion")],
+        [("Future is Black", "botao_future"), ("My Hero Academia", "botao_hero")],
+        [("Zor", "botao_zor"), ("Classic", "botao_classic")],
+        [("Furia X New Era", "botao_new_era"), ("Magic Panthera", "botao_panthera")],
         [("Hard to Love X Harder to Kill", "botao_love")],
         ]
     return criar_botoes_loja(lista_botoes)  
