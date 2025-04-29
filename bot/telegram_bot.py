@@ -119,7 +119,7 @@ def acionamento_botao(call:types.CallbackQuery):
         content = handler_func()
         if isinstance(content, dict) and "imagem" in content:
             with open(content["imagem"], "rb") as imagem:
-                bot.send_photo(call.message.chat.id, imagem, caption=content["text"], reply_markup=teclado_func())
+                bot.send_photo(call.message.chat.id, imagem, caption=content["texto"], reply_markup=teclado_func())
         
     elif call.data == "botao_voltar":
         bot.delete_message(call.message.chat.id, call.message.message_id)
