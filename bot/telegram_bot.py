@@ -1,6 +1,6 @@
 import telebot
 from telebot import types
-from handlers.menu import historia, time, whatsapp, redes, loja, contato
+from handlers.menu import bem_vindo, historia, time, whatsapp, redes, loja, contato
 from handlers.time import fallen, kscerato, molodoy, yekindar, yuurih 
 from handlers.loja import adidas, batman, champion, classic, future, hero, love, new_era, panthera, zor
 from utils.keep_alive import keep_alive
@@ -34,20 +34,20 @@ def teclado_inicial():
 @bot.message_handler(commands=["start","help"])
 def start(mensagem):
         
-    with open("static/imagens/menu/furia_start_image.png", "rb") as foto:
+    with open(bem_vindo["imagem"], "rb") as foto:
         bot.send_photo(
             mensagem.chat.id,
             foto,
-            caption="boas_vindas",
+            caption=bem_vindo["texto"],
             reply_markup=teclado_inicial()
         )
 
 def enviar_menu(chat_id):
-        with open("static/imagens/menu/furia_start_image.png", "rb") as foto:
-            bot.send_photo(
+    with open(bem_vindo["imagem"], "rb") as foto:
+        bot.send_photo(
             chat_id,
             foto,
-            caption="Bem vindo",
+            caption=bem_vindo["texto"],
             reply_markup=teclado_inicial()
         )
 
@@ -91,7 +91,7 @@ handlers = {
     "botao_time": (time.handler_time, teclado_inicial),
     "botao_whatsapp": (whatsapp.handler_whatsapp, teclado_inicial),  
     "botao_redes": (redes.handler_redes, teclado_inicial),
-    "botao_loja": (loja.handler_loja, teclado_inicial),
+    "botao_loja": (loja.handler_loja, menu_loja),
     "botao_contato": (contato.handler_contato, teclado_inicial),
     
     "botao_fallen": (fallen.handler_fallen, menu_time),  
