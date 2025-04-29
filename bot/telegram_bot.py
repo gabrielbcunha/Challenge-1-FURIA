@@ -38,7 +38,7 @@ def start(mensagem):
         bot.send_photo(
             mensagem.chat.id, 
             imagem, 
-            caption=start["texto"], 
+            caption=dados["texto"], 
             reply_markup=teclado_inicial()
         )
         
@@ -48,7 +48,7 @@ def enviar_menu(chat_id):
         bot.send_photo(
             chat_id, 
             imagem, 
-            caption=start["texto"], 
+            caption=dados["texto"], 
             reply_markup=teclado_inicial()
         )
         
