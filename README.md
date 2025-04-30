@@ -85,7 +85,7 @@ Challenge-1-Chatbot-FURIA/
 
 ## 📄 Licença
 
-Este projeto está licenciado sob a [MIT](LICENCE.md) License.
+Este projeto está licenciado sob a [MIT](LICENSE.md) License.
 
 ---
 
