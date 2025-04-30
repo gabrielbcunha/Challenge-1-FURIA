@@ -14,22 +14,22 @@ keep_alive()
 
 bot = telebot.TeleBot(TOKEN)
 
-def teclado_inicial():
+def criar_menu_inicial(lista_botoes):
     teclado = types.InlineKeyboardMarkup()
-    
-    botao_historia = types.InlineKeyboardButton("📜Nossa História", callback_data="botao_historia") 
-    botao_time = types.InlineKeyboardButton("🏆Nosso Time", callback_data="botao_time")
-    botao_whatsapp = types.InlineKeyboardButton("📱Bot Whatsapp", callback_data="botao_whatsapp")   
-    botao_redes = types.InlineKeyboardButton("🎥Redes Sociais", callback_data="botao_redes")
-    botao_loja = types.InlineKeyboardButton("🛒Lojinha da Pantera", callback_data="botao_loja")
-    botao_contato = types.InlineKeyboardButton("✉️Contate-nos", callback_data="botao_contato")
-    teclado.add(botao_time, botao_historia)
-    teclado.add(botao_whatsapp, botao_redes)
-    teclado.add(botao_loja)
-    teclado.add(botao_contato)
-   
-    teclado.add(types.InlineKeyboardButton("⬅️Voltar", callback_data="botao_voltar"))
+    for linha in lista_botoes:
+        botoes = [types.InlineKeyboardButton(texto, callback_data=callback) for texto, callback in linha]
+        teclado.add(*botoes)
+    teclado.ad0d(types.InlineKeyboardButton("Voltar", callback_data="botao_voltar"))
     return teclado
+
+def menu_inicial():
+    lista_botoes = [
+        [("🏆Nosso Time", "botao_time"), ("📜Nossa História","botao_historia")],
+        [("📱Bot Whatsapp", "botao_whatsapp"), ("🎥Redes Sociais", "botao_redes")],
+        [("🛒Lojinha da Pantera", "botao_loja")],
+        [("✉️Contate-nos","botao_contato")],
+    ]
+    return criar_menu_inicial(lista_botoes)    
 
 @bot.message_handler(commands=["start","help"])
 def start(mensagem):
@@ -39,7 +39,7 @@ def start(mensagem):
             mensagem.chat.id, 
             imagem, 
             caption=dados["texto"], 
-            reply_markup=teclado_inicial()
+            reply_markup=menu_inicial()
         )
         
 def enviar_menu(chat_id):
@@ -49,10 +49,9 @@ def enviar_menu(chat_id):
             chat_id, 
             imagem, 
             caption=dados["texto"], 
-            reply_markup=teclado_inicial()
+            reply_markup=menu_inicial()
         )
         
-
 def criar_botoes_time(lista_botoes):
     teclado = types.InlineKeyboardMarkup()
     for linha in lista_botoes:
@@ -89,12 +88,12 @@ def menu_loja():
     return criar_botoes_loja(lista_botoes)  
     
 handlers = {
-    "botao_historia": (historia.handler_historia, teclado_inicial),
-    "botao_time": (time.handler_time, teclado_inicial),
-    "botao_whatsapp": (whatsapp.handler_whatsapp, teclado_inicial),  
-    "botao_redes": (redes.handler_redes, teclado_inicial),
+    "botao_historia": (historia.handler_historia, menu_inicial),
+    "botao_time": (time.handler_time, menu_inicial),
+    "botao_whatsapp": (whatsapp.handler_whatsapp, menu_inicial),  
+    "botao_redes": (redes.handler_redes, menu_inicial),
     "botao_loja": (loja.handler_loja, menu_loja),
-    "botao_contato": (contato.handler_contato, teclado_inicial),
+    "botao_contato": (contato.handler_contato, menu_inicial),
     
     "botao_fallen": (fallen.handler_fallen, menu_time),  
     "botao_molodoy": (molodoy.handler_molodoy, menu_time),  
