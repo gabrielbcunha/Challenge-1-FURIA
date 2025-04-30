@@ -19,7 +19,7 @@ def criar_menu_inicial(lista_botoes):
     for linha in lista_botoes:
         botoes = [types.InlineKeyboardButton(texto, callback_data=callback) for texto, callback in linha]
         teclado.add(*botoes)
-    teclado.ad0d(types.InlineKeyboardButton("Voltar", callback_data="botao_voltar"))
+    teclado.add(types.InlineKeyboardButton("Voltar", callback_data="botao_voltar"))
     return teclado
 
 def menu_inicial():
