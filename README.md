@@ -62,7 +62,7 @@ python bot/telegram_bot.py
 ## 🛠️ Estrutura do Projeto 
 
 ```bash
-Challenge-1-FURIA/
+Challenge-1-Chatbot-FURIA/
 ├── bot/
 │   ├── telegram_bot.py
 │   └── handlers/
@@ -75,16 +75,17 @@ Challenge-1-FURIA/
 │       └── ...
 ├── utils/
 │   └── keep_alive.py
-├── requirements.txt
-└── .env
-└── LICENSE.md
+├── .env
+├── LICENSE.md
+├── README.md
+└── requirements.txt
 ```
 
 ---
 
 ## 📄 Licença
 
-Este projeto está licenciado sob a [MIT](LICENCE.MD) License.
+Este projeto está licenciado sob a [MIT](LICENCE.md) License.
 
 ---
 
