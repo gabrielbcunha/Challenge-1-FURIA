@@ -89,7 +89,7 @@ def menu_loja():
     
 handlers = {
     "botao_historia": (historia.handler_historia, menu_inicial),
-    "botao_time": (time.handler_time, menu_inicial),
+    "botao_time": (time.handler_time, menu_time),
     "botao_whatsapp": (whatsapp.handler_whatsapp, menu_inicial),  
     "botao_redes": (redes.handler_redes, menu_inicial),
     "botao_loja": (loja.handler_loja, menu_loja),
@@ -118,10 +118,17 @@ def acionamento_botao(call:types.CallbackQuery):
     if call.data in handlers:
         handler_func, teclado_func = handlers[call.data]
         content = handler_func()
+        
         if isinstance(content, dict) and "imagem" in content:
             with open(content["imagem"], "rb") as imagem:
-                bot.send_photo(call.message.chat.id, imagem, caption=content["texto"], reply_markup=teclado_func())
-        
+                media = types.InputMediaPhoto(media=imagem, caption=content["texto"])
+                bot.edit_message_media(
+                    media=media,
+                    chat_id=call.message.chat.id,
+                    message_id=call.message.message_id,
+                    reply_markup=teclado_func()
+                    )
+                        
     elif call.data == "botao_voltar":
         bot.delete_message(call.message.chat.id, call.message.message_id)
         enviar_menu(call.message.chat.id)  
