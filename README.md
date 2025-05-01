@@ -2,7 +2,7 @@
 
 Bot interativo no Telegram inspirado na organização de eSports FURIA. Desenvolvido como parte do Challenge #1 da FURIA, este bot é capaz de exibir informações sobre o elenco do time, links para as redes sociais e outros contatos da organização, além de também apresentar as coleções de produtos oficiais da Furia. 
 
----
+----
 
 ## 📸 Demonstração
 
