@@ -8,6 +8,7 @@ Bot interativo do Telegram inspirado na organização de eSports FURIA. Desenvol
 
 "Clique [aqui](https://t.me/furiagg_bot) para acessar e interagir com o bot. 
 
+![furia_bot_image](https://github.com/user-attachments/assets/ed0ea939-b5a5-4dd2-8a46-387832b29155)
 
 ---
 
