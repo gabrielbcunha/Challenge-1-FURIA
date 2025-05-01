@@ -1,6 +1,6 @@
 # 🐾 Challenge 1 - ChatBot FURIA
 
-Bot interativo do Telegram inspirado na organização de eSports FURIA. Desenvolvido como parte do Challenge #1 da FURIA, este bot oferece informações sobre a equipe, produtos oficiais e canais de contato.
+Bot interativo no Telegram inspirado na organização de eSports FURIA. Desenvolvido como parte do Challenge #1 da FURIA, este bot é capaz de exibir informações sobre o elenco do time, links para as redes sociais e outros contatos da organização, além de também apresentar as coleções de produtos oficiais da Furia. 
 
 ---
 
@@ -8,6 +8,7 @@ Bot interativo do Telegram inspirado na organização de eSports FURIA. Desenvol
 
 "Clique [aqui](https://t.me/furiagg_bot) para acessar e interagir com o bot. 
 
+<img src="https://i.imgur.com/pMgXlue.jpeg" alt="Demonstração do Bot" width="200">
 
 ---
 
@@ -62,7 +63,7 @@ python bot/telegram_bot.py
 ## 🛠️ Estrutura do Projeto 
 
 ```bash
-Challenge-1-FURIA/
+Challenge-1-Chatbot-FURIA/
 ├── bot/
 │   ├── telegram_bot.py
 │   └── handlers/
@@ -75,16 +76,17 @@ Challenge-1-FURIA/
 │       └── ...
 ├── utils/
 │   └── keep_alive.py
-├── requirements.txt
-└── .env
-└── LICENSE.md
+├── .env
+├── LICENSE.md
+├── README.md
+└── requirements.txt
 ```
 
 ---
 
 ## 📄 Licença
 
-Este projeto está licenciado sob a [MIT](LICENCE.MD) License.
+Este projeto está licenciado sob a [MIT](LICENSE.md) License.
 
 ---
 
